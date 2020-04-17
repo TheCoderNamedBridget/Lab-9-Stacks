@@ -1,0 +1,80 @@
+
+public class LinkedStack {
+
+	private static class Node {
+
+		private String data;
+
+		private Node next;
+
+		public Node(String d, Node n) {
+			data = d;
+			next = n;
+		}
+
+		public String toString() {
+			return data;
+		}
+	}
+
+	private Node top;
+
+	public LinkedStack() {
+
+		top = null;
+
+	}
+
+	public boolean isEmpty() {
+
+		return top == null;
+
+	}
+
+	public void push(String s) {
+		top = new Node(s, top);
+	}
+
+	public String pop() {
+		
+		String retVal = "";
+		
+		if (!isEmpty()) {
+			
+			retVal = top.data;
+			top = top.next;
+		}
+		return retVal;
+	}
+
+	public String peek() {
+		
+		String retVal = "";
+		if (!isEmpty()) {
+			retVal = top.data;
+		}
+		return retVal;
+	}
+
+	public String toString() {
+		
+		String s = "";
+		Node n = top;
+		while (n != null) {
+			s = s + n.data + " ";
+			n = n.next;
+		}
+		return s;
+	}
+
+	public int size() {
+		
+		int count = 0;
+		Node n = top;
+		while (n != null) {
+			count++;
+			n = n.next;
+		}
+		return count;
+	}
+}
