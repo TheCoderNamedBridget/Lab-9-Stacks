@@ -1,0 +1,115 @@
+
+/**
+ * 
+ * In the main class user is prompted to give point coordinates
+ * The points are all added to a stack and then removed in FILO order
+ * The point's coordinates are then taken and used to populate a 2D array 
+ * with the value of that point's order in line 
+ * @author Bridget Naylor
+ * @date 4/20/2020
+ */
+
+import java.awt.Point;
+
+public class Main {
+	
+	//the 2d array to hold point order values
+	static char[][] posArray = new char[5][5];
+	
+	//the stack to add and remove points from
+	static LinkedStack stack = new LinkedStack();
+	
+	public static void main( String[] args ) {
+		
+		//populate 2D array with '.' char value
+		for (int i = 0; i < 5; i++)
+		{
+			for (int j = 0; j < 5; j++)
+			{
+				posArray[i][j] = '.';
+			}
+		}
+
+		
+		//get user inputs
+		System.out.println("Enter 5 Locations (0-4): ");
+		for (int pos = 0; pos < 5; pos++)
+		{
+		    System.out.println("r" + (pos+1) +":");
+		    
+		    int row = CheckInput.getIntRange(0,4);
+		    
+		    System.out.println("c" + (pos+1) +":");
+		    
+		    int col = CheckInput.getIntRange(0,4);
+		    
+		    //add new point to the stack
+		    stack.push( new Point( row, col ) );
+		    
+		}
+		
+		for (int order = 5; order > 0 ; order --)
+		{
+			//get top point
+			Point popped = stack.pop();
+			
+			//get top point x and y pos
+			int stackXPos = popped.x;
+			int stackYPos = popped.y;
+			
+			//System.out.println( "x popped : " + stackXPos + " y popped : " + stackYPos);
+			
+			char placeInStack = (char)(order);
+			
+			//set point stack order at the point's coordinates in array
+			posArray[stackXPos][stackYPos] = placeInStack;
+			
+			//System.out.println( "Place in stack : " + (int)placeInStack);
+			
+			//set point stack order at the point's neighbors in array
+			if ( stackXPos - 1 >= 0 )//top
+			{
+				posArray[stackXPos - 1][stackYPos] = placeInStack;
+			}
+			if ( stackXPos + 1 <= 4  )//bottom
+			{
+				posArray[stackXPos + 1][stackYPos] = placeInStack;
+			}
+			if ( stackYPos + 1 <= 4  )//right
+			{
+				posArray[stackXPos][stackYPos + 1] = placeInStack;
+			}
+			if ( stackYPos - 1 >= 0 )//left
+			{
+				posArray[stackXPos ][stackYPos - 1] = placeInStack;
+			}
+
+		}
+		
+		//print out contents of the 2D array
+		for (int row = 0; row < 5; row ++)
+		{
+			for (int col = 0; col < 5; col ++)
+			{
+				
+				if ( posArray[row][col] != '.' )
+				{
+					System.out.print( (int)posArray[row][col] + " " );
+				} 
+				else 
+				{
+					System.out.print( posArray[row][col] + " " );
+				}
+				
+			}
+			System.out.println( "" );
+		}
+		
+		
+
+		
+		
+
+	}
+	
+}
