@@ -1,20 +1,26 @@
+import java.awt.Point;
+
+/**
+ * @author Mrs.Cleary
+ */
+
 
 public class LinkedStack {
 
 	private static class Node {
 
-		private String data;
+		private Point data;
 
 		private Node next;
 
-		public Node(String d, Node n) {
+		public Node(Point d, Node n) {
 			data = d;
 			next = n;
 		}
 
-		public String toString() {
-			return data;
-		}
+//		public Point toString() {
+//			return data;
+//		}
 	}
 
 	private Node top;
@@ -31,13 +37,13 @@ public class LinkedStack {
 
 	}
 
-	public void push(String s) {
+	public void push(Point s) {
 		top = new Node(s, top);
 	}
 
-	public String pop() {
+	public Point pop() {
 		
-		String retVal = "";
+		Point retVal = null;
 		
 		if (!isEmpty()) {
 			
@@ -47,9 +53,9 @@ public class LinkedStack {
 		return retVal;
 	}
 
-	public String peek() {
+	public Point peek() {
 		
-		String retVal = "";
+		Point retVal = null;
 		if (!isEmpty()) {
 			retVal = top.data;
 		}
